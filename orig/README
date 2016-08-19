@@ -1,0 +1,10 @@
+# Download modern human genomes from Altai website
+wget -r --no-parent -A "SS*.hg19_1000g.*.mod.vcf.*" http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
+
+# The .vcf files have a missing line in the header, which should read
+##FILTER=<ID=LowQual,Description="Low quality">
+for i in AltaiNea.hg19_1000g.*.mod.vcf.gz; do zcat $i | sed '1a ##FILTER=<ID=LowQual,Description="Low quality">'| gzip -c > `basename $i .vcf.gz`-fixed.vcf.gz; done
+
+# Concatenate Neanderthal autosomes
+bcftools concat --file-list autosomes --threads 20 --output-type b --output AltaiNea.bgz
+
