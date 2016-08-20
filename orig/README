@@ -31,6 +31,18 @@ http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
 
     ls AltaiNea.hg*.vcf.gz | xargs -P 20 -n 1 bash doaltai.sh
 
+# After running this, I have files with names like xxx-fixed.vcf.gz, which bcftools
+# will read without reporting errors.
+
+# Get rid of original vcf files.
+   ls *.vcf.gz | grep -v fixed | xargs rm
+
+# I forgot to compress with bgzip, so..
+echo 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X | xargs -P 12 -n 1 bash dobgzip.sh
+
+# Filter
+echo 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X | xargs -P 10 -n 1 bash filter.sh
+
 # Concatenate Neanderthal autosomes
 
     bcftools concat --file-list autosomes --threads 20 --output-type b --output AltaiNea.bgz
