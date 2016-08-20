@@ -5,6 +5,18 @@ wget -r --no-parent -A "SS*.hg19_1000g.*.mod.vcf.*" http://cdna.eva.mpg.de/neand
 ##FILTER=<ID=LowQual,Description="Low quality">
 for i in AltaiNea.hg19_1000g.*.mod.vcf.gz; do zcat $i | sed '1a ##FILTER=<ID=LowQual,Description="Low quality">'| gzip -c > `basename $i .vcf.gz`-fixed.vcf.gz; done
 
+# Getting error from bcftools, which reads:
+	[W::vcf_parse] INFO '.' is not defined in the header, assuming Type=String
+# To find the cause of this error, I looked at the output lines surrounding the error:
+	bcftools view AltaiNea.hg19_1000g.22.mod-fixed.vcf.gz 2>&1 | grep -C 20 "not defined"
+# A few lines after the error, I found this:
+	22      18685734        .       C       .       .       .       .;RM;TS=HHHP;TSseq=C,C,C,-;CAnc=C       GT:A:C:G:T:IR   ./.:0,0:0,1:0,0:0,0:0
+	22      18685735        .       A       .       .       .       .;RM;TS=HHHP;TSseq=A,A,A,-;CAnc=A       GT:A:C:G:T:IR   ./.:0,1:0,0:0,0:0,0:0
+	22      18685736        .       A       .       .       .       .;RM;TS=HHHP;TSseq=A,A,A,-;CAnc=A       GT:A:C:G:T:IR   ./.:0,1:0,0:0,0:0,0:0
+
+# I suppose I could strip these out with something like "zcat foo.vcf.gz | grep
+# -v "<TAB>\.;"" (You have to use "^v<tab>" to insert a literal tab.)
+
 # Concatenate Neanderthal autosomes
 bcftools concat --file-list autosomes --threads 20 --output-type b --output AltaiNea.bgz
 
