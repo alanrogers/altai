@@ -1,9 +1,18 @@
 # Download modern human genomes from Altai website
-wget -r --no-parent -A "SS*.hg19_1000g.*.mod.vcf.*" http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
+wget -r --no-parent -A "SS*.hg19_1000g.*.mod.vcf.*" \
+http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
 
-# The .vcf files have a missing line in the header, which should read
-##FILTER=<ID=LowQual,Description="Low quality">
-for i in AltaiNea.hg19_1000g.*.mod.vcf.gz; do zcat $i | sed '1a ##FILTER=<ID=LowQual,Description="Low quality">'| gzip -c > `basename $i .vcf.gz`-fixed.vcf.gz; done
+# The .vcf files have two problems:
+# Problem 1: The "LowQual" value, which shows up in the FILTER
+# field, is not defined.
+#
+# Problem 2: Some INFO fields begin with ".;", which also generates
+# a warning in bcftools.
+#
+# The code below filters all .vcf.gz files through a sed script, which adds 
+# a definition of LowQual and replaces the string "\t.;" with "\t". In other 
+# words, it deletes ".;" at the beginning of a field.
+ls AltaiNea.hg*.vcf.gz | xargs -P 20 -n 1 bash doaltai.sh
 
 # Getting error from bcftools, which reads:
 	[W::vcf_parse] INFO '.' is not defined in the header, assuming Type=String
