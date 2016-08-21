@@ -40,10 +40,21 @@ http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
 # I forgot to compress with bgzip, so..
 echo 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X | xargs -P 12 -n 1 bash dobgzip.sh
 
+# Index
+ls *.vcf.bgz | xargs -P 20 -n 1 tabix
+
 # Filter
 echo 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X | xargs -P 10 -n 1 bash filter.sh
 
+# Index
+ls *.bcf | xargs -P 20 -n 1 tabix
+
 # Concatenate Neanderthal autosomes
+    bcftools concat --file-list autosomes --threads 20 --output-type b --output AltaiNea.bcf
 
-    bcftools concat --file-list autosomes --threads 20 --output-type b --output AltaiNea.bgz
-
+# Generate data for analysis. Output looks like
+# 22,20006558,G,G/G
+# 22,20006574,G,A/A
+# 22,20006992,A,C/C
+# Columns are chr, pos, ref, alt, ancestral_allele, genotypes...
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/CAnc[\t%GT]\n' AltaiNea.bcf | daf > AltaiNea.daf

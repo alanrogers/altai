@@ -9,11 +9,11 @@ bcftools view --output-file ../AltaiNea-2Mb.vcf -M2 -v snps --exclude 'QUAL<30 &
 
 
 # Generate data for analysis. Output looks like
-# 22,20006558,G,G/G
-# 22,20006574,G,A/A
-# 22,20006992,A,C/C
-# Columns are chr, pos, ref, alt, ancestral_allele, genotypes...
-bcftools query -f '%CHROM,%POS,%REF,%ALT,%INFO/CAnc[,%GT]\n' AltaiNea-2Mb.vcf
+# 22	20006558	G	G/G
+# 22	20006574	G	A/A
+# 22	20006992	A	C/C
+# Tab-separated columns are chr, pos, ref, alt, ancestral_allele, genotypes...
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/CAnc[\t%GT]\n' AltaiNea-2Mb.vcf
 
 # Get list of CEU samples
 grep CEU orig/integrated_call_samples_v3.20130502.ALL.panel | cut -f 1
