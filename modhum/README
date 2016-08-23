@@ -17,3 +17,6 @@ http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
 
 # Remove originals
     rm *.mod.vcf.gz *.mod.vcf.gz.tbi
+
+# filter
+cat autosomes | tr ".-" " " | awk '{print $1, $3}' | xargs -n 2 bash filter.sh
