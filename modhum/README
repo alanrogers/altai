@@ -27,5 +27,9 @@ cat autosomes | xargs -P 15 -n 1 tabix
 # filter
 cat autosomes | tr ".-" " " | awk '{print $1, $3}' | xargs -P 15 -n 2 bash filter.sh
 
+# Oops! My filter.sh file combines conditions with "&" rather than "|". I'll
+# need to re-do. Should be much faster, because I won't need to refer to the
+# .bed file.
+
 # Create a list of sequence ids
 ls *fixed*.bgz | tr "." "\t" | cut -f1 | sort | uniq > seqid
