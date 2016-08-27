@@ -48,7 +48,27 @@ mv SS6004476_autosomes.bcf karitiana_autosomes.bcf
 mv SS6004479_autosomes.bcf mixe_autosomes.bcf
 mv SS6004480_autosomes.bcf dinka_autosomes.bcf
 
+# Errors:
+# mv: cannot stat 'SS6004479_autosomes.bcf': No such file or directory
+# mv: cannot stat 'SS6004480_autosomes.bcf': No such file or directory
+# Perhaps the download failed for these files.
+
+# Index the two australian sequences
+echo SS6004477_autosomes.bcf SS6004478_autosomes.bcf | xargs -P 2 -n 1 tabix
+
 # Merge the two Australian sequences into a single bcf file.
 bcftools merge --output australia_autosomes.bcf \
   --output-type b \
   SS6004477_autosomes.bcf SS6004478_autosomes.bcf
+
+# Remove the single-sequence Australian files
+rm SS6004477_autosomes.bcf SS6004478_autosomes.bcf
+
+# Generate data for analysis.
+ls *_autosomes.bcf | xargs -P 11 -n 1 bash mkdaf.sh
+
+# Problem: With multiple files, tabpat tabulates only 40k SNPs. Yet
+# each of the .daf files has around 2e6 lines. This suggests that the
+# SNPs in the various files are largely distinct, with only a minority
+# of lines held in common. Am I somehow excluding SNPs that are
+# monomorphic in a given population?
