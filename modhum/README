@@ -33,3 +33,22 @@ ls *fixed*.bgz | tr "." "\t" | cut -f1 | sort | uniq > seqid
 
 # Concatenate autosomes for each sequence
 cat seqid | xargs -P 24 -n 1 bash concat.sh
+
+# Change names of files to reflect populations
+mv SS6004467_autosomes.bcf dai_autosomes.bcf
+mv SS6004468_autosomes.bcf french_autosomes.bcf
+mv SS6004469_autosomes.bcf han_autosomes.bcf
+mv SS6004470_autosomes.bcf mandenka_autosomes.bcf
+mv SS6004471_autosomes.bcf mbuti_autosomes.bcf
+mv SS6004472_autosomes.bcf papuan_autosomes.bcf
+mv SS6004473_autosomes.bcf san_autosomes.bcf
+mv SS6004474_autosomes.bcf sardinian_autosomes.bcf
+mv SS6004475_autosomes.bcf yoruba_autosomes.bcf
+mv SS6004476_autosomes.bcf karitiana_autosomes.bcf
+mv SS6004479_autosomes.bcf mixe_autosomes.bcf
+mv SS6004480_autosomes.bcf dinka_autosomes.bcf
+
+# Merge the two Australian sequences into a single bcf file.
+bcftools merge --output australia_autosomes.bcf \
+  --output-type b \
+  SS6004477_autosomes.bcf SS6004478_autosomes.bcf
