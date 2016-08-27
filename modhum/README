@@ -30,3 +30,6 @@ cat autosomes | tr ".-" " " | awk '{print $1, $3}' | sort -k1 -k2 \
 
 # Create a list of sequence ids
 ls *fixed*.bgz | tr "." "\t" | cut -f1 | sort | uniq > seqid
+
+# Concatenate autosomes for each sequence
+cat seqid | xargs -P 24 -n 1 bash concat.sh
