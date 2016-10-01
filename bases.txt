@@ -1,0 +1,8 @@
+# Count number of high-quality bases in full genome
+zcat AltaiNea.map35_99.MQ30.Cov.indels.TRF.bed.bgz \
+  | sort-bed - \
+  | bedops --merge - \
+  | awk -F'\t' '{s+= $3-$2} END{print s}'
+1737814738
+
+or 1.74e9
