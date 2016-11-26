@@ -2,6 +2,8 @@
 README files associated with data from Prufer et al paper on Altai Neanderthal genome
 bcftools view --output-file AltaiNea-22-filtered.vcf -M2 -v snps --exclude 'QUAL<30 & MQ<30' AltaiNea.hg19_1000g.22.mod.vcf.gz
 
+# Download minimal filter
+wget https://bioinf.eva.mpg.de/altai_minimal_filters/AltaiNea.map35_99.MQ30.Cov.indels.TRF.bed.bgz
 
 cd orig; tabix AltaiNea.hg19_1000g.22.mod.vcf.gz
 
