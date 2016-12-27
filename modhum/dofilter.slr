@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH -J rep
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=04:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o dofilter.out # stdout
+#SBATCH -e dofilter.err # stderr
+
+# Execute this with "sbatch dofilter.slr".
+
+# Quality control
+cat autosomes | tr ".-" " " | awk '{print $1, $3}' | sort -k1 -k2 \
+ | xargs -P 42 -n 2 bash filter.sh
+
+
