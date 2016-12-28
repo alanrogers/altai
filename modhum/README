@@ -44,6 +44,8 @@ mv SS6004473_autosomes.bcf san_autosomes.bcf
 mv SS6004474_autosomes.bcf sardinian_autosomes.bcf
 mv SS6004475_autosomes.bcf yoruba_autosomes.bcf
 mv SS6004476_autosomes.bcf karitiana_autosomes.bcf
+mv SS6004477_autosomes.bcf aus1_autosomes.bcf
+mv SS6004478_autosomes.bcf aus2_autosomes.bcf
 mv SS6004479_autosomes.bcf mixe_autosomes.bcf
 mv SS6004480_autosomes.bcf dinka_autosomes.bcf
 

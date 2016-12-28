@@ -1,0 +1,29 @@
+#!/bin/bash
+#SBATCH -J rep
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=04:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o download.out # stdout
+#SBATCH -e download.err # stderr
+
+# Execute this with "sbatch download.slr".
+
+# Download modern human genomes from Altai website
+#wget http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/README_Bteam
+#wget -r -nH -nd --no-parent -A "SS*.hg19_1000g.*.mod.vcf.*" \
+#http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
+
+# I'm lacking SS6004478 SS6004479 SS6004480
+wget http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/README_Bteam
+wget -r -nH -nd --no-parent -A "SS6004478.hg19_1000g.*.mod.vcf.*" \
+http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
+
+wget http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/README_Bteam
+wget -r -nH -nd --no-parent -A "SS6004479.hg19_1000g.*.mod.vcf.*" \
+http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
+
+wget http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/README_Bteam
+wget -r -nH -nd --no-parent -A "SS6004480.hg19_1000g.*.mod.vcf.*" \
+http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
