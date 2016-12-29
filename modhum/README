@@ -46,15 +46,8 @@ mv SS6004473_autosomes.bcf san_autosomes.bcf
 mv SS6004474_autosomes.bcf sardinian_autosomes.bcf
 mv SS6004475_autosomes.bcf yoruba_autosomes.bcf
 mv SS6004476_autosomes.bcf karitiana_autosomes.bcf
-mv SS6004477_autosomes.bcf aus1_autosomes.bcf
-mv SS6004478_autosomes.bcf aus2_autosomes.bcf
 mv SS6004479_autosomes.bcf mixe_autosomes.bcf
 mv SS6004480_autosomes.bcf dinka_autosomes.bcf
-
-# Errors:
-# mv: cannot stat 'SS6004479_autosomes.bcf': No such file or directory
-# mv: cannot stat 'SS6004480_autosomes.bcf': No such file or directory
-# Perhaps the download failed for these files.
 
 # Index the two australian sequences
 echo SS6004477_autosomes.bcf SS6004478_autosomes.bcf | xargs -P 2 -n 1 tabix
@@ -75,3 +68,16 @@ ls *_autosomes.bcf | xargs -P 11 -n 1 bash mkdaf.sh
 # SNPs in the various files are largely distinct, with only a minority
 # of lines held in common. Am I somehow excluding SNPs that are
 # monomorphic in a given population?
+
+# Trying to figure out where the SNPs are going.
+
+zcat SS6004479.hg19_1000g.1.mod.vcf.gz | wc -l
+224834503
+
+zcat SS6004479.hg19_1000g.1-fixed.vcf.bgz | wc -l
+224834504
+
+zcat SS6004479.hg19_1000g.1.filtered.vcf.gz | wc -l
+317605
+
+I'm losing 99.9% of the SNPs in filter.sh
