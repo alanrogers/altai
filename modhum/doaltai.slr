@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH -J rep
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=04:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o doaltai.out # stdout
+#SBATCH -e doaltai.err # stderr
+
+# Execute this with "sbatch doaltai.slr".
+
+# Fix errors in vcf files
+ls *.mod.vcf.gz | xargs -P 28 -n 1 bash doaltai.sh
+
+

@@ -3,6 +3,8 @@
 wget -r --no-parent -A "SS*.hg19_1000g.*.mod.vcf.*" \
 http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
 
+# Make a list of original files
+ls SS*.mod.vcf.gz  > files.orig
 # Getting this error from bcftools:
     [W::vcf_parse] FILTER 'LowQual' is not defined in the header
 
@@ -10,7 +12,7 @@ http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
 # which are documented in the orig directory. For this run, I modified 
 # so that the output is compressed using bgzip.
 
-    ls *.mod.vcf.gz | xargs -P 10 -n 1 bash doaltai.sh
+    sbatch doaltai.slr
 
 # After running this, I have files with names like xxx-fixed.vcf.bgz, which bcftools
 # will read without reporting errors.
