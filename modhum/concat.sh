@@ -14,5 +14,8 @@ for chr in `seq 1 22 | sort`; do
   echo ${seqid}.hg19_1000g.${chr}.filtered.vcf.gz >> ${fname}
 done
 
+# write seqid to stderr
+echo Processing sequence ${seqid} 1>&2
+
 # Concatenate autosomes
 bcftools concat --file-list ${fname} --output-type b --output ${seqid}_autosomes.bcf

@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH -J rep
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=10:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o checkorig.out # stdout
+#SBATCH -e checkorig.err # stderr
+
+# Execute this with "sbatch checkorig.slr".
+
+ls SS*.mod.vcf.gz | xargs -P 28 -n 1 bash checkorig.sh
+

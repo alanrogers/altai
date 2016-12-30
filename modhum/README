@@ -21,7 +21,7 @@ ls SS*.mod.vcf.gz  > files.orig
     rm *.mod.vcf.gz *.mod.vcf.gz.tbi
 
 # List of autosome files
-    ls *.vcf.bgz | grep -v X | grep -v MT | grep -v Y | grep -v nonchrom > autosomes
+    ls *.vcf.bgz | sed -n '/X\|Y\|nonchrom\|MT/!p' > autosomes
 
 # Index
 cat autosomes | xargs -P 15 -n 1 tabix
