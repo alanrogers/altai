@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH -J rep
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=10:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 28
+#SBATCH -o fixedtbi.out # stdout
+#SBATCH -e fixedtbi.err # stderr
+
+# Execute this with "sbatch fixedtbi.slr".
+make -j 28 all
+

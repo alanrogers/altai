@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH -J rep
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=10:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o chkinfo.out # stdout
+#SBATCH -e chkinfo.err # stderr
+
+# Execute this with "sbatch chckinfo.slr".
+ls SS*-fixed.vcf.bgz | xargs -P 28 -n 1 bash chkinfo.sh
+
