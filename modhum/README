@@ -3,6 +3,11 @@
 wget -r --no-parent -A "SS*.hg19_1000g.*.mod.vcf.*" \
 http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
 
+# Check the downloaded files. I've done this only with recently-downloaded files--
+# those for SS6004478, SS6004479, and SS6004480. I deleted the originals of the other
+# files before checking them.
+sbatch checkorig.slr
+
 # Make a list of original files
 ls SS*.mod.vcf.gz  > files.orig
 # Getting this error from bcftools:
