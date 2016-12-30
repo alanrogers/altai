@@ -12,9 +12,9 @@
 
 # Download modern human genomes from Altai website
 #wget http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/README_Bteam
-#wget -r -nH -nd --no-parent -A "SS*.hg19_1000g.*.mod.vcf.*" \
+#wget -nv -r -nH -nd --no-parent -A "SS*.hg19_1000g.*.mod.vcf.*" \
 #http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
 
 wget http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/README_Bteam
-wget -r -nH -nd --no-parent -A "SSSS6004480.hg19_1000g.10.mod.vcf.*" \
+wget -nv -r -nH -nd --no-parent -A "SS6004480.hg19_1000g.10.mod.vcf.*" \
 http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
