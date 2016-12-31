@@ -6,7 +6,7 @@ filteredtbi := $(filteredvcf:.gz=.gz.tbi)
 %.vcf.bgz.tbi : %.vcf.bgz
 	tabix $<
 
-%.vcf.gz.tbi : %.vcf.gz
+%.filtered.vcf.gz.tbi : %.filtered.vcf.gz
 	tabix $<
 
 %.filtered.vcf.gz : %-fixed.vcf.bgz
