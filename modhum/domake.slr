@@ -5,9 +5,9 @@
 #SBATCH --time=10:00:00
 #SBATCH --nodes 1
 #SBATCH --ntasks 28
-#SBATCH -o fixedtbi.out # stdout
-#SBATCH -e fixedtbi.err # stderr
+#SBATCH -o domake.out # stdout
+#SBATCH -e domake.err # stderr
 
-# Execute this with "sbatch fixedtbi.slr".
+# Execute this with "sbatch domake.slr".
 make -j 28 all
 

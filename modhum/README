@@ -11,25 +11,25 @@ sbatch checkorig.slr
 # Make a list of original files
 ls SS*.mod.vcf.gz  > files.orig
 # Getting this error from bcftools:
-    [W::vcf_parse] FILTER 'LowQual' is not defined in the header
+[W::vcf_parse] FILTER 'LowQual' is not defined in the header
 
 # To fix this problem, I'm using the altai.sed and doaltai.sh scripts,
 # which are documented in the orig directory. For this run, I modified 
 # so that the output is compressed using bgzip.
 
-    sbatch doaltai.slr
+sbatch doaltai.slr
 
 # After running this, I have files with names like xxx-fixed.vcf.bgz, which bcftools
 # will read without reporting errors.
 
 # Remove originals
-    rm *.mod.vcf.gz *.mod.vcf.gz.tbi
+rm *.mod.vcf.gz *.mod.vcf.gz.tbi
 
 # List of autosome files
-    ls *.vcf.bgz | sed -n '/X\|Y\|nonchrom\|MT/!p' > autosomes
+ls *-fixed.vcf.bgz | sed -n '/X\|Y\|nonchrom\|MT/!p' > autosomes
 
 # Index
-cat autosomes | xargs -P 15 -n 1 tabix
+sbatch fixedtbi.slr
 
 # filter
 sbatch dofilter.slr

@@ -11,5 +11,8 @@
 *.gtp
 *.tbi
 *.bai
+all
+*.err 
+*.out
 genetic_map_chr*.txt
 hotspots_*.txt
