@@ -1,4 +1,4 @@
-# Download modern human genomes from Altai website. After download, 
+# Download modern human genomes from Altai website. After download,
 # I moved them all into directory modhum.
 wget -r --no-parent -A "SS*.hg19_1000g.*.mod.vcf.*" \
 http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
@@ -14,16 +14,13 @@ ls SS*.mod.vcf.gz  > files.orig
 [W::vcf_parse] FILTER 'LowQual' is not defined in the header
 
 # To fix this problem, I'm using the altai.sed and doaltai.sh scripts,
-# which are documented in the orig directory. For this run, I modified 
+# which are documented in the orig directory. For this run, I modified
 # so that the output is compressed using bgzip.
 
 sbatch doaltai.slr
 
-# After running this, I have files with names like xxx-fixed.vcf.bgz, which bcftools
-# will read without reporting errors.
-
-# Remove originals
-rm *.mod.vcf.gz *.mod.vcf.gz.tbi
+# After running this, I have files with names like xxx-fixed.vcf.bgz,
+# which bcftools will read without reporting errors.
 
 # List of autosome files
 ls *-fixed.vcf.bgz | sed -n '/X\|Y\|nonchrom\|MT/!p' > autosomes

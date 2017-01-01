@@ -3,23 +3,31 @@ fixedtbi := $(fixedvcf:.bgz=.bgz.tbi)
 filteredvcf := $(fixedvcf:-fixed.vcf.bgz=.filtered.vcf.gz)
 filteredtbi := $(filteredvcf:.gz=.gz.tbi)
 
+.SECONDARY : $(fixedtbi) $(filteredvcf) $(filteredtbi)
+
+# index a compressed vcf file
 %.vcf.bgz.tbi : %.vcf.bgz
 	tabix $<
+	touch $@.done
 
-%.filtered.vcf.gz.tbi : %.filtered.vcf.gz
+# index a compressed vcf file
+%.vcf.gz.tbi : %.vcf.gz
 	tabix $<
+	touch $@.done
 
-%.filtered.vcf.gz : %-fixed.vcf.bgz
+# index a bcf file
+%.bcf.csi : %.bcf
+	tabix $<
+	touch $@.done
+
+# filter step required fixed file and index
+%.filtered.vcf.gz : %-fixed.vcf.bgz %-fixed.vcf.bgz.tbi
 	bcftools view --exclude 'QUAL<30 || MQ<30' $< | bgzip > $@
+	touch $@.done
 
-filteredtbi_done :  filteredvcf_done $(filteredtbi)
-	touch filteredtbi_done
+# make a list of sequence ids
+seqid := $(shell echo $(fixedvcf)  | tr "." "\t" | cut -f1 | sort | uniq)
 
-filteredvcf_done :  fixedtbi_done $(filteredvcf)
-	touch filteredvcf_done
+$(info $(seqid)
 
-fixedtbi_done :  fixedvcf_done $(fixedtbi)
-	touch fixedtbi_done
-
-fixedvcf_done: $(fixedvcf)
-	touch fixedvcf_done
+all :  $(filteredtbi)
