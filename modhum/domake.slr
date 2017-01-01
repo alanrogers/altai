@@ -9,5 +9,5 @@
 #SBATCH -e domake.err # stderr
 
 # Execute this with "sbatch domake.slr".
-make -j 28 all
+make -j 28
 

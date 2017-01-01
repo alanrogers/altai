@@ -4,4 +4,4 @@ fname=$1
 echo Checking file ${fname} 1>&2
 
 # test compressed file. Nothing is printed to stdout. Diagnostics go to stderr
-cat -t ${fname}
+cat -t ${fname} >/dev/null
