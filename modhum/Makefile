@@ -28,6 +28,6 @@ filteredtbi := $(filteredvcf:.gz=.gz.tbi)
 # make a list of sequence ids
 seqid := $(shell echo $(fixedvcf)  | tr "." "\t" | cut -f1 | sort | uniq)
 
-$(info $(seqid)
+$(info $(seqid))
 
 all :  $(filteredtbi)
