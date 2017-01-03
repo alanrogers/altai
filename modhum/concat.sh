@@ -18,4 +18,8 @@ done
 echo Processing sequence ${seqid} 1>&2
 
 # Concatenate autosomes
-bcftools concat --file-list ${fname} --output-type b --output ${seqid}_autosomes.bcf
+bcftools concat --file-list ${fname} --output-type b \
+--threads 28 --output ${seqid}_autosomes.bcf
+
+# document completion
+echo Finished sequence ${seqid} 1>&2

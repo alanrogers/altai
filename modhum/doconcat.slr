@@ -11,6 +11,6 @@
 # Execute this with "sbatch doconcat.slr".
 
 # Concatenate autosomes
-#cat seqid | xargs -P 42 -n 1 bash concat.sh
-cat todo | xargs -P 28 -n 1 bash concat.sh
+#cat seqid | xargs -P 28 -n 1 bash concat.sh
+cat todo | xargs -n 1 bash concat.sh
 
