@@ -10,6 +10,6 @@
 
 fmt="AltaiNea.hg19_1000g.%s.mod.vcf.gz "
 # concatenate autosomes
-bcftools concat --file-list <(seq 22 | sort | xargs printf fmt ) \
+bcftools concat --file-list <(seq 22 | sort | xargs printf ${fmt} ) \
   --threads 32 --output-type b --output AltaiNea.bcf
 
