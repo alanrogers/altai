@@ -2,6 +2,12 @@
 
     sbatch download.slr
 
+# Concatenate Neanderthal autosomes
+    bcftools concat --file-list autosomes --threads 20 --output-type b --output AltaiNea.bcf
+
+############################ OLD #######################################
+
+
 # Getting two errors from bcftools:
     [W::vcf_parse] FILTER 'LowQual' is not defined in the header
 	[W::vcf_parse] INFO '.' is not defined in the header, assuming Type=String
@@ -48,9 +54,6 @@ echo 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X | xargs -P 10 -n
 
 # Index
 ls *.bcf | xargs -P 20 -n 1 tabix
-
-# Concatenate Neanderthal autosomes
-    bcftools concat --file-list autosomes --threads 20 --output-type b --output AltaiNea.bcf
 
 # Generate data for analysis. Output looks like
 # 22,20006558,G,G/G
