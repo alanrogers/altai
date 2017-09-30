@@ -1,6 +1,6 @@
 # Download modern human genomes from Altai website
-wget -r --no-parent -A "SS*.hg19_1000g.*.mod.vcf.*" \
-http://cdna.eva.mpg.de/neandertal/altai/ModernHumans/vcf/
+
+    sbatch download.slr
 
 # Getting two errors from bcftools:
     [W::vcf_parse] FILTER 'LowQual' is not defined in the header
