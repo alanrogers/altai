@@ -1,14 +1,34 @@
 # Download modern human genomes from Altai website: AltaiNea*.mod.vcf.gz
     sbatch download.slr
 
+# Count lines in genome files
+	sbatch nufixed.slr
+
+Number of sites: 2,683,909,764
+
 # Fix malformed vcf files to make AltaiNea*-fixed.vcf.gz
     sbatch fixvcf.slr    
+
+# Count lines in fixed files	
+	sbatch nfixed.slr
+
+Number of sites: 2,683,909,764
 
 # Concatenate Neanderthal autosomes to make AltaiNea.vcf.bgz
     sbatch concat.slr
 
+# Count lines in concatenated file
+	sbatch nconcat.slr
+
+Number of sites: 2,683,909,764
+
 # Filter using bed file to make AltaiNea-filtered.vcf.bgz
     sbatch filter.slr
+
+# Count lines in filtered file
+	sbatch nfiltered.slr
+
+Number of sites: 1,656,870,708
 
 # Create altai.daf
     sbatch daf.slr

@@ -8,8 +8,4 @@
 #SBATCH -o nfixed.txt # stdout
 #SBATCH -e nfixed.err # stderr
 
-ls AltaiNea.hg19*.mod-fixed.vcf.gz | xargs -n 1 bash countlines.sh |
-
-ifile=AltaiNea.bcf
-echo "lines in ${ifile}"
-bcftools query -f'%CHROM\n' ${ifile} | wc -l |
+ls AltaiNea.hg19*.mod-fixed.vcf.gz | xargs -n 1 bash countlines.sh | awk '{s+=$1} END{print s}'
