@@ -4,7 +4,7 @@
 # Fix malformed vcf files to make AltaiNea*-fixed.vcf.gz
     sbatch fixvcf.slr    
 
-# Concatenate Neanderthal autosomes to make AltaiNea.bcf
+# Concatenate Neanderthal autosomes to make AltaiNea.vcf.bgz
     sbatch concat.slr
 
 # Filter using bed file to make AltaiNea-filtered.vcf.bgz
