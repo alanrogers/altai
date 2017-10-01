@@ -11,4 +11,4 @@
 bed="../bed/AltaiNea.map35_99.MQ30.Cov.indels.TRF.bed.bgz"
 vcf="AltaiNea.bcf"
 ofile="AltaiNea-filtered.vcf.bgz"
-zcat ${vcf} | bedvcf <(zcat ${bed}) | bgzip > ${ofile}
+bcftools view ${vcf} | bedvcf <(zcat ${bed}) | bgzip > ${ofile}
