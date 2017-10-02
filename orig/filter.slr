@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH -J filter
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=10:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o filter.out # stdout
+#SBATCH -e filter.err # stderr
+
+bed="../bed/AltaiNea.map35_99.MQ30.Cov.indels.TRF.bed.bgz"
+vcf="AltaiNea.vcf.bgz"
+ofile="AltaiNea-filtered.vcf.bgz"
+zcat view ${vcf} | bedvcf <(zcat ${bed}) | bgzip > ${ofile}

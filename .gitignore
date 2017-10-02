@@ -12,7 +12,7 @@
 *.tbi
 *.bai
 all
-*.err 
+*.err
 *.out
 genetic_map_chr*.txt
 hotspots_*.txt
