@@ -1,0 +1,11 @@
+#!/bin/bash
+#SBATCH -J idxcat
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=10:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o idxcat.out
+#SBATCH -e idxcat.err
+
+bcftools index AltaiNea.bcf
