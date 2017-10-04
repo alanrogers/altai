@@ -5,9 +5,9 @@
 #SBATCH --time=10:00:00
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
-#SBATCH -o altai-filtered.vcf.gz
+#SBATCH -o altai-filtered.vcf.bgz
 #SBATCH -e filter.err
 
 bed="../bed/AltaiNea.map35_99.MQ30.Cov.indels.TRF.bed.bgz"
-vcf="AltaiNea.bcf"
-bcftools view --threads 5 --output-type z --regions-file ${bed} ${vcf}
+vcf="altai.vcf.gz"
+bedtools intersect -header -sorted -a {vcf} -b {bed} | bgzip
