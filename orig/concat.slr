@@ -1,15 +1,15 @@
 #!/bin/bash
-#SBATCH -J concat
+#SBATCH -J catalt
 #SBATCH --account=rogersa-kp
 #SBATCH --partition=rogersa-kp
 #SBATCH --time=10:00:00
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
-#SBATCH -o concat.out # stdout
+#SBATCH -o altai.vcf.gz
 #SBATCH -e concat.err # stderr
 
 fmt="AltaiNea.hg19_1000g.%s.mod-fixed.vcf.gz\n"
 # concatenate autosomes
 bcftools concat --file-list <(seq 22 | sort | xargs printf ${fmt} ) \
-  --threads 32 --output-type v | bgzip > AltaiNea.vcf.gz
+  --threads 32 --output-type z
 
