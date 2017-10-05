@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH -J noloalt
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=10:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o nolow.out # stdout
+#SBATCH -e nolow.err # stderr
+
+vcf=altai-filtered.vcf.bgz
+ofile=altai-nolow.vcf.gz
+zgrep -v LowQual ${vcf} | bgzip > ${ofile}
+
+
