@@ -9,4 +9,4 @@
 #SBATCH -e asmref.err # stderr
 
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/CAnc[\t%GT]\n' \
-AltaiNea-filtered.vcf.bgz | asmref
+altai-filtered.vcf.bgz | asmref

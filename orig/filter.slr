@@ -10,4 +10,4 @@
 
 bed="../bed/AltaiNea.map35_99.MQ30.Cov.indels.TRF.bed.bgz"
 vcf="altai.vcf.gz"
-bedtools intersect -header -sorted -a {vcf} -b {bed} | bgzip
+bedtools intersect -header -sorted -a ${vcf} -b ${bed} | bgzip

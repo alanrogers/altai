@@ -8,5 +8,5 @@
 #SBATCH -o nfiltered.txt # stdout
 #SBATCH -e nfiltered.err # stderr
 
-ifile=AltaiNea-filtered.vcf.bgz
+ifile=altai-filtered.vcf.bgz
 bcftools query -f'%CHROM\n' ${ifile} | wc -l
