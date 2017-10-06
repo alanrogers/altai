@@ -33,6 +33,12 @@ Number of sites: 2,683,909,764
 
 Number of sites: 1,656,870,708
 
+# Remove LowQual sites
+    sbatch nolow.slr
+
+# Remove duplicate sites
+    sbatch nodup.slr
+
 # Create altai.daf
     sbatch daf.slr
 

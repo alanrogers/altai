@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH -J dupalt
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=10:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o altai-dedup.vcf.gz
+#SBATCH -e dedup.err # stderr
+
+vcf=altai-nolow.vcf.gz
+bcftools norm --rm-dup any -O z --threads 5 ${vcf}

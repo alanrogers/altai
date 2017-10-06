@@ -8,5 +8,5 @@
 #SBATCH -o altai.daf # stdout
 #SBATCH -e daf.err # stderr
 
-vcf=altai-nolow.vcf.gz
+vcf=altai-dedup.vcf.gz
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/CAnc[\t%GT]\n' ${vcf} | daf
