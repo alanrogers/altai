@@ -14,7 +14,7 @@ Number of sites: 2,683,909,764
 
 Number of sites: 2,683,909,764
 
-# Concatenate Neanderthal autosomes to make AltaiNea.bcf
+# Concatenate Neanderthal autosomes to make altai.vcf.gz
     sbatch concat.slr
 
 # Index resulting file
@@ -25,7 +25,7 @@ Number of sites: 2,683,909,764
 
 Number of sites: 2,683,909,764
 
-# Filter using bed file to make AltaiNea-filtered.vcf.bgz
+# Filter using bed file to make altai-filtered.vcf.bgz
     sbatch filter.slr
 
 # Count lines in filtered file
