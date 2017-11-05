@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH -J rafalt
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=10:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o altai.raf # stdout
+#SBATCH -e raf.err # stderr
+
+vcf=altai-dedup.vcf.gz
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t[\t%GT]\n' ${vcf} | raf
