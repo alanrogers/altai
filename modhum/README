@@ -83,3 +83,10 @@ zcat SS6004479.hg19_1000g.1.filtered.vcf.gz | wc -l
 317605
 
 I'm losing 99.9% of the SNPs in filter.sh
+
+# Getting rid of everything except originals
+
+rm *-fixed*
+rm *.filtered.vcf.gz
+rm *.filtered.vcf.gz.tbi
+rm *_autosomes*
