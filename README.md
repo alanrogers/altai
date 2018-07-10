@@ -29,3 +29,11 @@ grep -v sample orig/integrated_call_samples_v3.20130502.ALL.panel | cut -f 2 | s
 
 # Minimal filters: SI5b of Prufer et al Nature paper.
 https://bioinf.eva.mpg.de/altai_minimal_filters/
+
+# Archive
+
+Used `rclone copy` to move entire altai tree to pando archive
+storage. Then used `rclone delete` to remove the .git tree from the
+archive.
+
+Remove orig/AltaiNea.hg19_1000g.*.mod.vcf.gz

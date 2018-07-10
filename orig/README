@@ -7,9 +7,9 @@
 Number of sites: 2,683,909,764
 
 # Fix malformed vcf files to make AltaiNea*-fixed.vcf.gz
-    sbatch fixvcf.slr    
+    sbatch fixvcf.slr
 
-# Count lines in fixed files	
+# Count lines in fixed files
 	sbatch nfixed.slr
 
 Number of sites: 2,683,909,764
