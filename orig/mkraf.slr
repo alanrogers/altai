@@ -29,7 +29,7 @@ bcftools norm --multiallelics +any -Ou |
 # not sure what --multiallelics really does.
 bcftools norm --rm-dup any -Ou |
 
-# Not using this, because the Altai vcf doesn't define INFO/snp.
+# We only want SNPs
 bcftools filter --include 'TYPE="snp"' -Ou |
 
 # print in format required by raf
