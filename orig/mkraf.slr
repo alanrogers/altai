@@ -15,7 +15,7 @@ vcf="altai.vcf.gz"
 bedtools intersect -header -sorted -a ${vcf} -b ${bed} |
 
 # bcftools is choking on some of the INFO fields, so remove most of them.
-bcftools annotate --remove "^INFO/DP,INFO/MQ" |
+bcftools annotate --remove "FORMAT/PL,^INFO/DP,INFO/MQ" -Ou |
 
 # Get rid of sites within 7 bases of an indel.
 bcftools filter --SnpGap 7 -Ou |
@@ -27,7 +27,7 @@ bcftools norm --multiallelics +any -Ou |
 bcftools norm --rm-dup any -Ou |
 
 # Exclude LowQual sites. (These are only in Altai and Denisova.)
-grep -v LowQual |
+#grep -v LowQual |
 
 # print in format required by raf
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' ${vcf} |
