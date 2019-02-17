@@ -20,11 +20,17 @@ bcftools annotate --remove "FORMAT/PL,^INFO/DP,INFO/MQ" -Ou |
 # Get rid of sites within 7 bases of an indel.
 bcftools filter --SnpGap 7 -Ou |
 
-# Merge lines that refer to different alleles at a single position
+# Combine lines that refer to different alleles at a single position
 bcftools norm --multiallelics +any -Ou |
 
-# Remove duplicates.
+# Remove any duplicates. I had hoped this wouldn't be necessary,
+# because the previous command is supposed to combine duplicates into
+# a single line. But it doesn't, so I've put --rm-dup back in. I'm
+# not sure what --multiallelics really does.
 bcftools norm --rm-dup any -Ou |
+
+# We only want SNPs
+bcftools filter TYPE="snp" -Ou |
 
 # print in format required by raf
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' |
