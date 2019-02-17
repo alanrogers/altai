@@ -14,11 +14,11 @@ vcf="altai.vcf.gz"
 # keep only sites listed in bed file
 bedtools intersect -header -sorted -a ${vcf} -b ${bed} |
 
-# Get rid of sites within 7 bases of an indel.
-bcftools filter --SnpGap 7 -Ou |
-
 # bcftools is choking on some of the INFO fields, so remove most of them.
 bcftools annotate --remove "^INFO/DP,INFO/MQ" |
+
+# Get rid of sites within 7 bases of an indel.
+bcftools filter --SnpGap 7 -Ou |
 
 # Merge lines that refer to different alleles at a single position
 bcftools norm --multiallelics +any -Ou |
