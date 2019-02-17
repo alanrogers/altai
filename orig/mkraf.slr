@@ -14,21 +14,23 @@ vcf="altai.vcf.gz"
 # keep only sites listed in bed file
 bedtools intersect -header -sorted -a ${vcf} -b ${bed} |
 
-# Merge lines that refer to different alleles at a single position
-#bcftools norm --multiallelics +any -Ou |
-bcftools norm --multiallelics +any -Ov > foo.vcf 
+# Remove INFO/AC annotation, because bcftools norm is choking on it.
+bcftools annotate --remove INFO/AC |
 
-## Remove duplicates.
-#bcftools norm --rm-dup any -Ou |
-#
-## Get rid of sites within 7 bases of an indel.
-#bcftools filter --SnpGap 7 -Ou |
-#
-## Exclude LowQual sites. (These are only in Altai and Denisova.)
-#grep -v LowQual |
-#
-## print in format required by raf
-#bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' ${vcf} |
-#
-## generate raf .raf.gz file
-#raf | gzip -c
+# Merge lines that refer to different alleles at a single position
+bcftools norm --multiallelics +any -Ou |
+
+# Remove duplicates.
+bcftools norm --rm-dup any -Ou |
+
+# Get rid of sites within 7 bases of an indel.
+bcftools filter --SnpGap 7 -Ou |
+
+# Exclude LowQual sites. (These are only in Altai and Denisova.)
+grep -v LowQual |
+
+# print in format required by raf
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' ${vcf} |
+
+# generate raf .raf.gz file
+raf | gzip -c
