@@ -1,4 +1,4 @@
-# Download modern human genomes from Altai website: AltaiNea*.mod.vcf.gz
+# Download -> AltaiNea.hg19_1000g.1.mod.vcf.gz
     sbatch download.slr
 
 # Count lines in genome files
@@ -6,7 +6,7 @@
 
 Number of sites: 2,683,909,764
 
-# Fix malformed vcf files to make AltaiNea*-fixed.vcf.gz
+# Fix malformed vcf files -> AltaiNea.hg19_1000g.1.mod-fixed.vcf.gz
     sbatch fixvcf.slr
 
 # Count lines in fixed files
@@ -25,34 +25,12 @@ Number of sites: 2,683,909,764
 
 Number of sites: 2,683,909,764
 
-# Filter using bed file to make altai-filtered.vcf.bgz
-    sbatch filter.slr
-
-# Count lines in filtered file
-	sbatch nfiltered.slr
-
-Number of sites: 1,656,870,708
-
-# Remove LowQual sites
-    sbatch nolow.slr
-
-# Remove duplicate sites
-    sbatch nodup.slr
-
-# Create altai.daf
-    sbatch daf.slr
+# Filter and generate altai.raf
+    sbatch mkraf.slr
 
 From daf.err:
     daf: 1,610,765,888 good sites; 37,241,280 rejected
     daf: bad sites with multiple alt alleles: 371
     daf: bad sites with multiple ancestral alleles: 509,106
     daf: bad sites with missing ancestral alleles: 36,731,808
-
-############################ OLD #######################################
-
-# Index
-ls *.vcf.bgz | xargs -P 20 -n 1 tabix
-
-# Index
-ls *.bcf | xargs -P 20 -n 1 tabix
 

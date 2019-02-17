@@ -9,4 +9,4 @@
 #SBATCH -e dedup.err # stderr
 
 vcf=altai-nolow.vcf.gz
-bcftools norm --rm-dup any -O z --threads 5 ${vcf}
+bcftools norm --multiallelics +any -O z --threads 5 ${vcf}
