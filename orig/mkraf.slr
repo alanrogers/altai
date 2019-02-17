@@ -19,7 +19,7 @@ grep -v LowQual |
 
 # Merge lines that refer to different alleles at a single position
 # Remove duplicates.
-bcftools norm --multiallelics+any --rm-dup any -O v ${vcf} |
+bcftools norm --multiallelics +any --rm-dup any -O v ${vcf} |
 
 # Get rid of sites within 7 bases of an indel.
 bcftools filter --SnpGap 7 -O v |
