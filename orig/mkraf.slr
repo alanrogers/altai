@@ -26,9 +26,6 @@ bcftools norm --multiallelics +any -Ou |
 # Remove duplicates.
 bcftools norm --rm-dup any -Ou |
 
-# Exclude LowQual sites. (These are only in Altai and Denisova.)
-#grep -v LowQual |
-
 # print in format required by raf
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' ${vcf} |
 
