@@ -27,7 +27,7 @@ bcftools norm --multiallelics +any -Ou |
 bcftools norm --rm-dup any -Ou |
 
 # print in format required by raf
-bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' ${vcf} |
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' |
 
 # generate raf .raf.gz file
 raf | gzip -c
