@@ -14,9 +14,6 @@ vcf="altai.vcf.gz"
 # keep only sites listed in bed file
 bedtools intersect -header -sorted -a ${vcf} -b ${bed} |
 
-# exclude LowQual sites
-grep -v LowQual |
-
 # Merge lines that refer to different alleles at a single position
 bcftools norm --multiallelics +any -Ou |
 
@@ -25,6 +22,9 @@ bcftools norm --rm-dup any -Ou |
 
 # Get rid of sites within 7 bases of an indel.
 bcftools filter --SnpGap 7 -Ou |
+
+# exclude LowQual sites
+grep -v LowQual |
 
 # print in format required by raf
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' ${vcf} |
