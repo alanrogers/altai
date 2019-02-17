@@ -17,8 +17,12 @@ bedtools intersect -header -sorted -a ${vcf} -b ${bed} |
 # exclude LowQual sites
 grep -v LowQual |
 
-# merge lines that refer to different alleles at a single position
-bcftools norm -m+any -O v --threads 5 ${vcf} |
+# Merge lines that refer to different alleles at a single position
+# Remove duplicates.
+bcftools norm --multiallelics+any --rm-dup any-O v ${vcf} |
+
+# Get rid of sites within 7 bases of an indel.
+bcftools filter --SnpGap 7 -O v |
 
 # print in format required by raf
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' ${vcf} |
