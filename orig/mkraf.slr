@@ -19,7 +19,8 @@ bcftools filter --SnpGap 7 -Ou |
 
 # Remove INFO/AC,INFO/AF annotations, because bcftools norm is choking on 
 # them.
-bcftools annotate --remove INFO/AC,INFO/AF |
+#bcftools annotate --remove INFO/AC,INFO/AF |
+bcftools annotate --remove "^INF/Map20,INF/DP,INF/FS,INF/MQ" |
 
 # Merge lines that refer to different alleles at a single position
 bcftools norm --multiallelics +any -Ou |
