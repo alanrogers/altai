@@ -17,10 +17,8 @@ bedtools intersect -header -sorted -a ${vcf} -b ${bed} |
 # Get rid of sites within 7 bases of an indel.
 bcftools filter --SnpGap 7 -Ou |
 
-# Remove INFO/AC,INFO/AF annotations, because bcftools norm is choking on 
-# them.
-#bcftools annotate --remove INFO/AC,INFO/AF |
-bcftools annotate --remove "^INF/Map20,INF/DP,INF/FS,INF/MQ" |
+# bcftools is choking on some of the INFO fields, so remove most of them.
+bcftools annotate --remove "^INFO/DP,INFO/MQ" |
 
 # Merge lines that refer to different alleles at a single position
 bcftools norm --multiallelics +any -Ou |
