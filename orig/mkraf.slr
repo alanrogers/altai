@@ -18,7 +18,7 @@ bedtools intersect -header -sorted -a ${vcf} -b ${bed} |
 grep -v LowQual |
 
 # Merge lines that refer to different alleles at a single position
-bcftools norm --multiallelics +any ${vcf} -Ou |
+bcftools norm --multiallelics +any -Ou |
 
 # Remove duplicates.
 bcftools norm --rm-dup any -Ou |
