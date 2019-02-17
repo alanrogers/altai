@@ -5,7 +5,7 @@
 #SBATCH --time=10:00:00
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
-#SBATCH -o altai.raf
+#SBATCH -o altai.raf.gz
 #SBATCH -e mkraf.err
 
 bed="../bed/AltaiNea.map35_99.MQ30.Cov.indels.TRF.bed.bgz"
@@ -23,5 +23,5 @@ bcftools norm -m+any -O v --threads 5 ${vcf} |
 # print in format required by raf
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' ${vcf} |
 
-# generate raf .raf file
-raf
+# generate raf .raf.gz file
+raf | gzip -c
