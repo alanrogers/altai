@@ -30,7 +30,7 @@ bcftools norm --multiallelics +any -Ou |
 bcftools norm --rm-dup any -Ou |
 
 # We only want SNPs
-bcftools filter TYPE="snp" -Ou |
+bcftools filter --include TYPE="snp" -Ou |
 
 # print in format required by raf
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' |
