@@ -3,6 +3,10 @@
 
 import sys
 
+if len(sys.argv) != 1:
+    print >> sys.stderr, "Usage: python dups.py < input"
+    sys.exit(1)
+
 duplicate = False
 oldchrom = pos = None
 
@@ -15,7 +19,7 @@ for line in sys.stdin:
     if len(fields) == 0:
         continue
     if len(fields) < 2:
-        print "less than 2 fields:", line
+        print >> sys.stderr, "fewer than 2 fields:", line
         sys.exit(1)
     chrom = fields[0]
     pos = fields[1]
@@ -34,7 +38,3 @@ for line in sys.stdin:
     oldline = line[:]
     oldchrom = chrom[:]
     oldpos = pos[:]
-            
-        
-        
-    
