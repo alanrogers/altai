@@ -14,23 +14,14 @@ vcf="altai.vcf.gz"
 # keep only sites listed in bed file
 bedtools intersect -header -sorted -a ${vcf} -b ${bed} |
 
-# bcftools is choking on some of the INFO fields, so remove most of them.
+# bcftools is choking on some INFO and FORMAT fields, so remove most of them.
 bcftools annotate --remove "FORMAT/PL,^INFO/DP,INFO/MQ" -Ou |
-
-# Get rid of sites within 7 bases of an indel.
-bcftools filter --SnpGap 7 -Ou |
 
 # Combine lines that refer to different alleles at a single position
 bcftools norm --multiallelics +any -Ou |
 
-# Remove any duplicates. I had hoped this wouldn't be necessary,
-# because the previous command is supposed to combine duplicates into
-# a single line. But it doesn't, so I've put --rm-dup back in. I'm
-# not sure what --multiallelics really does.
-bcftools norm --rm-dup any -Ou |
-
-# We only want SNPs
-bcftools filter --include 'TYPE="snp"' -Ou |
+# We only want only SNPs, and not those adjacent to indels
+bcftools filter --SnpGap 7 --include 'TYPE="snp"' -Ou |
 
 # print in format required by raf
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' |
