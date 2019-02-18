@@ -2,7 +2,7 @@
     sbatch download.slr
 
 # Count lines in genome files
-	sbatch nufixed.slr
+    sbatch nufixed.slr
 
 Number of sites: 2,683,909,764
 
@@ -10,7 +10,7 @@ Number of sites: 2,683,909,764
     sbatch fixvcf.slr
 
 # Count lines in fixed files
-	sbatch nfixed.slr
+    sbatch nfixed.slr
 
 Number of sites: 2,683,909,764
 
@@ -21,7 +21,7 @@ Number of sites: 2,683,909,764
     sbatch idxcat.slr
 
 # Count lines in concatenated file
-	sbatch nconcat.slr
+    sbatch nconcat.slr
 
 Number of sites: 2,683,909,764
 
@@ -29,5 +29,5 @@ Number of sites: 2,683,909,764
     sbatch mkraf.slr
 
 From mkraf.err:
-	raf: 1,656,870,246 good sites; 371 rejected
-	raf: bad sites with multiple alt alleles: 371
+    raf: 1,656,870,246 good sites; 371 rejected
+    raf: bad sites with multiple alt alleles: 371
