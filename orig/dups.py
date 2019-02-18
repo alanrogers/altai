@@ -7,12 +7,18 @@ duplicate = False
 oldchrom = pos = None
 
 for line in sys.stdin:
+    line = line.strip()
     if line[0] == '#':
         print line
         continue
-    fields = line.strip().split()
+    fields = line.split('\t')
+    if len(fields) == 0:
+        continue
+    if len(fields) < 2:
+        print "less than 2 fields:", line
+        sys.exit(1)
     chrom = fields[0]
-    pos = int(fields[1])
+    pos = fields[1]
     if duplicate:
         if chrom == oldchrom and pos == oldpos:
             print line
@@ -27,7 +33,7 @@ for line in sys.stdin:
             duplicate = False
     oldline = line[:]
     oldchrom = chrom[:]
-    oldpos = pos
+    oldpos = pos[:]
             
         
         
