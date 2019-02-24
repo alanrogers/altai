@@ -10,7 +10,7 @@
 
 bed="../bed/AltaiNea.map35_99.MQ30.Cov.indels.TRF.bed.bgz"
 vcf="altai.vcf.gz"
-ref=$HOME/group/rogers/data/hg19/hg19-sort.fa.gz
+ref=$HOME/group/rogers/data/hg19/hg19.fa.gz
 
 # keep only sites listed in bed file
 bedtools intersect -header -sorted -a ${vcf} -b ${bed} |
