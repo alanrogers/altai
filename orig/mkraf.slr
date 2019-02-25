@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J mkraf
+#SBATCH -J amkraf
 #SBATCH --account=rogersa
 #SBATCH --partition=kingspeak
 #SBATCH --time=24:00:00
@@ -42,4 +42,4 @@ bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' |
 raf | gzip -c
 
 # delete scratch files
-#rm -rf $scrdir
+rm -rf $scrdir
