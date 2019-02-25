@@ -8,14 +8,17 @@
 #SBATCH -o altai.raf.gz
 #SBATCH -e mkraf.err
 
-# create scrate directory
+# create scratch directory
 scrdir=/scratch/general/lustre/$USER/$SLURM_JOBID
 mkdir -p $scrdir
 
+# reference genome directory
+refdir=$HOME/group/rogers/data/hg19
+
 # copy ref to scratch and uncompress; also copy index file
-ref_fa=$scrdir/hg19-sort.fa
-twoBitToFa hg19-sort.2bit $ref_fa
-cp hg19-sort.fa.fai $scrdir
+ref_fa=${scrdir}/hg19-sort.fa
+twoBitToFa ${refdir}/hg19-sort.2bit $ref_fa
+cp ${refdir}/hg19-sort.fa.fai $scrdir
 
 bed="../bed/AltaiNea.map35_99.MQ30.Cov.indels.TRF.bed.bgz"
 vcf="altai.vcf.gz"
@@ -39,4 +42,4 @@ bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' |
 raf | gzip -c
 
 # delete scratch files
-rm -rf $scrdir
+#rm -rf $scrdir
