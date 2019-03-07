@@ -33,8 +33,8 @@ bcftools annotate --remove "FORMAT/PL,^INFO/DP,INFO/MQ" -Ou |
 bcftools norm --multiallelics +any --fasta-ref $ref_fa -Ou |
 
 # We only want only SNPs and REFs not adjacent to indels
-bcftools filter --SnpGap 7 \
-		 --include 'INFO/MQ>37 & MIN(FMT/GQ)>30 & (TYPE="snp"||TYPE="ref")' -Ou |
+bcftools filter --SnpGap 7 --set-GTs '.' \
+		 --include '(TYPE="snp"||TYPE="ref") & INFO/MQ>37 & FMT/GQ>30' -Ou |
 
 # print in format required by raf
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' |
