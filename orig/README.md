@@ -1,18 +1,10 @@
 # Download -> AltaiNea.hg19_1000g.1.mod.vcf.gz
     sbatch download.slr
 
-# Count lines in genome files
-    sbatch nufixed.slr
-
 Number of sites: 2,683,909,764
 
 # Fix malformed vcf files -> AltaiNea.hg19_1000g.1.mod-fixed.vcf.gz
     sbatch fixvcf.slr
-
-# Count lines in fixed files
-    sbatch nfixed.slr
-
-Number of sites: 2,683,909,764
 
 # Concatenate Neanderthal autosomes to make altai.vcf.gz
     sbatch concat.slr
@@ -20,14 +12,5 @@ Number of sites: 2,683,909,764
 # Index resulting file
     sbatch idxcat.slr
 
-# Count lines in concatenated file
-    sbatch nconcat.slr
-
-Number of sites: 2,683,909,764
-
 # Filter and generate altai.raf
     sbatch mkraf.slr
-
-From mkraf.err:
-    raf: 1,656,870,246 good sites; 371 rejected
-    raf: bad sites with multiple alt alleles: 371
