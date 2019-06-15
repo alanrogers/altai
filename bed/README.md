@@ -24,6 +24,6 @@ Croatia. Science, 358(6363):655-658.
 
 ### Download bed files
 
-    sbatch download.slr
+    sbatch getbed.slr
 
 
