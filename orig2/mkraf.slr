@@ -5,7 +5,7 @@
 #SBATCH --time=36:00:00
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
-#SBATCH -o vindija.raf.gz
+#SBATCH -o altai.raf.gz
 #SBATCH -e mkraf.err
 
 # create scratch directory
