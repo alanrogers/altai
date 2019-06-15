@@ -21,7 +21,10 @@ twoBitToFa ${refdir}/hg19-sort.2bit $ref_fa
 cp ${refdir}/hg19-sort.fa.fai $scrdir
 
 vfmt="chr%d_mq25_mapab100.vcf.gz\n"
-bfmt="../bed2/chr%d_mask.bed.gz\n"
+
+# The new bed file names begin with "chr". The old ones start with
+# integers.
+bfmt="../bed/chr%d_mask.bed.gz\n"
 
 # ensure consistent sort
 export LC_ALL=C
